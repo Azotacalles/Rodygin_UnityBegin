@@ -3345,6 +3345,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   jump: 300
   speed: 3
+  turnSpeed: 100
 --- !u!114 &176793141
 MonoBehaviour:
   m_ObjectHideFlags: 0
