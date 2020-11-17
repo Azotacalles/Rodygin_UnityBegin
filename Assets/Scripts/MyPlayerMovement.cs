@@ -4,38 +4,68 @@ using UnityEngine;
 
 public class MyPlayerMovement : MonoBehaviour
 {
-    [SerializeField] private float jump;
-    [SerializeField] private float speed;
-    [SerializeField] private float turnSpeed;
-    private Vector3 direction;
+    [SerializeField] private float speed = 5f;
+    [SerializeField] private float jumpSpeed = 300f;
+    [SerializeField] private float turnSpeed = 100;
+
+    private bool isGrounded;
     private Rigidbody rb;
 
-    private Vector3 rotation;
-
-    private void Start()
+    void Start()
     {
         rb = GetComponent<Rigidbody>();
     }
 
-    private void Update()
+
+    void FixedUpdate()
     {
-        //direction.x = Input.GetAxis("Horizontal");
-        rotation.y = Input.GetAxis("Horizontal");
-        direction.z = Input.GetAxis("Vertical");
-        if(Input.GetButtonDown("Vertical") && direction.z < 0)
-        {
-            transform.rotation *= Quaternion.AngleAxis(180, transform.up);
-            print("---");
-        }
-        if (Input.GetKeyDown(KeyCode.Space))
-            rb.AddForce(Vector3.up * jump, ForceMode.Force);
+        JumpLogic();
+
+        MovementLogic();
+
+        RotateLogic();
     }
 
-    private void FixedUpdate()
+    private void RotateLogic()
     {
-        var newSpeed = direction * speed * Time.fixedDeltaTime;
-        transform.Translate(newSpeed);
-
+        Vector3 rotation = Vector3.zero;
+        rotation.y = Input.GetAxis("Horizontal");       
         transform.Rotate(rotation * turnSpeed * Time.fixedDeltaTime);
+    }
+
+    private void MovementLogic()
+    {
+        float moveVertical = Input.GetAxis("Vertical");
+        Vector3 movement = new Vector3(0.0f, 0.0f, moveVertical);
+        transform.Translate(movement * speed * Time.fixedDeltaTime);
+    }
+
+    private void JumpLogic()
+    {
+        if (Input.GetAxis("Jump") > 0)
+        {
+            if (isGrounded)
+            {
+                rb.AddForce(Vector3.up * jumpSpeed);
+            }
+        }
+    }
+
+    void OnCollisionEnter(Collision collision)
+    {
+        IsGroundedUpate(collision, true);
+    }
+
+    void OnCollisionExit(Collision collision)
+    {
+        IsGroundedUpate(collision, false);
+    }
+
+    private void IsGroundedUpate(Collision collision, bool value)
+    {
+        if (collision.gameObject.tag == ("Ground"))
+        {
+            isGrounded = value;
+        }
     }
 }
