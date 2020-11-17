@@ -17,7 +17,7 @@ public class BulletScript : MonoBehaviour
     
     void Update()
     {
-        rb.AddForce(player.transform.forward * 25, ForceMode.Force);
+        rb.velocity = transform.forward * 20f;
     }
 
     private void OnTriggerEnter(Collider other)

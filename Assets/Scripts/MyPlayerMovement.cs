@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class MyPlayerMovement : MonoBehaviour
 {
-    [SerializeField] private float speed = 5f;
-    [SerializeField] private float jumpSpeed = 300f;
-    [SerializeField] private float turnSpeed = 100;
+    [SerializeField] private float speed;
+    [SerializeField] private float jumpSpeed;
+    [SerializeField] private float turnSpeed;
 
     private bool isGrounded;
     private Rigidbody rb;
@@ -29,7 +29,7 @@ public class MyPlayerMovement : MonoBehaviour
     private void RotateLogic()
     {
         Vector3 rotation = Vector3.zero;
-        rotation.y = Input.GetAxis("Horizontal");       
+        rotation.y = Input.GetAxis("Horizontal");
         transform.Rotate(rotation * turnSpeed * Time.fixedDeltaTime);
     }
 
