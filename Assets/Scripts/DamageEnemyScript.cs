@@ -5,28 +5,25 @@ using UnityEngine;
 public class DamageEnemyScript : MonoBehaviour
 {
     private int health = 100;
-    void Start()
+    private MyGameEnding gameEnding;
+    
+    public int Health
     {
-        
+        set { health = value; }
+        get { return health; }
+    }
+
+    private void Start()
+    {
+        gameEnding = GameObject.FindGameObjectWithTag("Player").GetComponent<MyGameEnding>();
     }
 
     void Update()
     {
         if(health <= 0)
         {
+            gameEnding.Enemies--;
             Destroy(gameObject);
-        }
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        
-    }
-    private void OnCollisionEnter(Collision collision)
-    {
-        if(collision.gameObject.CompareTag("Bullet"))
-        {
-            health -= 25;
         }
     }
 }

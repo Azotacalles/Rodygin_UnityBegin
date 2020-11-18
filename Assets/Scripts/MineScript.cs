@@ -30,10 +30,5 @@ public class MineScript : MonoBehaviour
                 Destroy(item.gameObject);
             }
         }
-        //if(collision.gameObject.CompareTag("Enemy"))
-        //{
-        //    Rigidbody rbEnemy = collision.gameObject.GetComponent<Rigidbody>();
-        //    rbEnemy.AddForce(Vector3.forward * force);
-        //}
     }
 }

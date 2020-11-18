@@ -6,12 +6,10 @@ public class BulletScript : MonoBehaviour
 {
     [SerializeField] private float speedBullet;
     private Rigidbody rb;
-    private MyGameEnding gameEnding;
 
     void Start()
     {
         rb = GetComponent<Rigidbody>();
-        gameEnding = GameObject.Find("JohnLemon").GetComponent<MyGameEnding>();
     }
 
     
@@ -20,8 +18,12 @@ public class BulletScript : MonoBehaviour
         rb.velocity = transform.forward * speedBullet;
     }
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider other)
     {
+        if (other.gameObject.CompareTag("Enemy"))
+        {
+            other.gameObject.GetComponent<DamageEnemyScript>().Health -= 25;
+        }
         Destroy(gameObject);
     }
 }

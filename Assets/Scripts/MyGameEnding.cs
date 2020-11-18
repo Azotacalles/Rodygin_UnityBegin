@@ -5,6 +5,8 @@ using UnityEngine;
 public class MyGameEnding : MonoBehaviour
 {
     private int enemies;
+    private int playerHealth = 100;
+    private float timer = 1;
 
     public int Enemies
     { 
@@ -14,12 +16,23 @@ public class MyGameEnding : MonoBehaviour
 
     void Start()
     {
-        enemies = GameObject.FindGameObjectsWithTag("PointSpawnEnemy").Length;
+        enemies = GameObject.FindGameObjectsWithTag("Enemy").Length;
     }
 
-    // Update is called once per frame
     void Update()
     {
+        if (playerHealth > 0)
+        {
+            if (timer > 0) timer -= Time.deltaTime;
+            else
+            {
+                timer = 1;
+                playerHealth--;
+                print(playerHealth);
+            }
+        }
+        else print("GAME OVER!");
+
         if (enemies == 0)
             print("WIN!");
     }
