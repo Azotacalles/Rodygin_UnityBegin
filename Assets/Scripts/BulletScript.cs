@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class BulletScript : MonoBehaviour
 {
+    [SerializeField] private float speedBullet;
     private Rigidbody rb;
     private MyGameEnding gameEnding;
 
@@ -16,17 +17,11 @@ public class BulletScript : MonoBehaviour
     
     void Update()
     {
-        rb.velocity = transform.forward * 20f;
+        rb.velocity = transform.forward * speedBullet;
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnCollisionEnter(Collision collision)
     {
-        if(other.CompareTag("Enemy"))
-        {
-            print("Enemy");
-            Destroy(other.gameObject);
-            gameEnding.Enemies--;
-        }
         Destroy(gameObject);
     }
 }

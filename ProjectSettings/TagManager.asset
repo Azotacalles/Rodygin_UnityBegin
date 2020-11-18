@@ -7,6 +7,8 @@ TagManager:
   - PointSpawnEnemy
   - Enemy
   - Ground
+  - Bullet
+  - Mine
   layers:
   - Default
   - TransparentFX
