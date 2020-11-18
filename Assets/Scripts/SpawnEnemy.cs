@@ -4,14 +4,14 @@ using UnityEngine;
 
 public class SpawnEnemy : MonoBehaviour
 {
-    [SerializeField] private GameObject pointSpawnEnemy;
+    [SerializeField] private GameObject spawnEnemy;
 
     void Start()
     {
         GameObject[] pointsSpawnEnemy = GameObject.FindGameObjectsWithTag("PointSpawnEnemy");
-        foreach (var item in pointsSpawnEnemy)
+        for(int i = 0; i < pointsSpawnEnemy.Length; i++)
         {
-            Instantiate(pointSpawnEnemy, item.transform.position, item.transform.rotation);
+            Instantiate(spawnEnemy, pointsSpawnEnemy[i].transform.position, pointsSpawnEnemy[i].transform.rotation);
         }
     }
 }

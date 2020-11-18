@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class BulletScript : MonoBehaviour
 {
-    [SerializeField] private GameObject player;
     private Rigidbody rb;
     private MyGameEnding gameEnding;
 
