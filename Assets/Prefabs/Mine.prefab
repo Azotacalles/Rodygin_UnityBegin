@@ -127,3 +127,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speedMine: 3
   force: 200
+  radiusDamage: 25
+  enemyLayer:
+    serializedVersion: 2
+    m_Bits: 256

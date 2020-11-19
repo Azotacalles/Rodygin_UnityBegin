@@ -14,9 +14,20 @@ public class MyGameEnding : MonoBehaviour
         set { enemies = value; }
     }
 
+    public int PlayerHealth
+    {
+        set 
+        {
+            playerHealth = value;
+            if (playerHealth > 100) playerHealth = 100;
+        }
+        get { return playerHealth; }
+    }
+
     void Start()
     {
         enemies = GameObject.FindGameObjectsWithTag("Enemy").Length;
+        enemies += GameObject.FindGameObjectsWithTag("PointSpawnEnemy").Length;
     }
 
     void Update()
