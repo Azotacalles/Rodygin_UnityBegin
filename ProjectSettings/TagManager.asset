@@ -9,6 +9,7 @@ TagManager:
   - Ground
   - Bullet
   - Mine
+  - Turel
   layers:
   - Default
   - TransparentFX
