@@ -26,7 +26,7 @@ public class DoorScript : MonoBehaviour
         {
             if (collision.gameObject.GetComponent<PlayerInventory>().Keys[numberKey])
             {
-                print("Open");
+                print($"Open {numberKey} Door");
                 open = true;
                 audioSource.Play();
             }
@@ -37,9 +37,7 @@ public class DoorScript : MonoBehaviour
     {      
         if (open)
         {
-            print("Upd");
             float dis = Vector3.Distance(beginPosition, currentPosition);
-            print("Dis" + dis);
             if (dis < 2)
             {
                 if (angle == 90 || angle == 270) transform.position += Vector3.forward * Time.deltaTime;
