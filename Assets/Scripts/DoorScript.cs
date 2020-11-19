@@ -4,22 +4,27 @@ using UnityEngine;
 
 public class DoorScript : MonoBehaviour
 {
+    [SerializeField] private int numberKey;
     private bool open;
     private AudioSource audioSource;
-    private int interpolationFramesCount = 45; // Number of frames to completely interpolate between the 2 positions
-    private int elapsedFrames = 0;
+    private Vector3 beginPosition;
+    private Vector3 currentPosition;
+    private float angle; 
 
     private void Start()
     {
         audioSource = GetComponent<AudioSource>();
         audioSource.Stop();
+        beginPosition = transform.position;
+        currentPosition = transform.position;
+        angle = Mathf.Round(transform.rotation.eulerAngles.y);
     }
 
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            if (collision.gameObject.GetComponent<PlayerInventory>().Keys[0])
+            if (collision.gameObject.GetComponent<PlayerInventory>().Keys[numberKey])
             {
                 print("Open");
                 open = true;
@@ -29,20 +34,19 @@ public class DoorScript : MonoBehaviour
     }
 
     private void Update()
-    {
-        if(open)
+    {      
+        if (open)
         {
-            if (transform.position.z > 49)
+            print("Upd");
+            float dis = Vector3.Distance(beginPosition, currentPosition);
+            print("Dis" + dis);
+            if (dis < 2)
             {
-                float interpolationRatio = (float)elapsedFrames / interpolationFramesCount;
-
-                transform.position = Vector3.Lerp(transform.position,
-                    new Vector3(transform.position.x, 0, transform.position.z - 0.25f),
-                    interpolationRatio);
-
-                elapsedFrames++;
+                if (angle == 90 || angle == 270) transform.position += Vector3.forward * Time.deltaTime;
+                else transform.position += Vector3.right * Time.deltaTime;
+                currentPosition = transform.position;
             }
-            else { open = false; audioSource.Stop(); }
+            else enabled = false;
         }
     }
 }

@@ -17,9 +17,4 @@ public class PlayerInventory : MonoBehaviour
     {
         keys = new bool[amountKey];
     }
-
-    void Update()
-    {
-        
-    }
 }
