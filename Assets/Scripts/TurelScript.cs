@@ -19,7 +19,6 @@ public class TurelScript : MonoBehaviour
 
     void Update()
     {
-        print("Turel");
         if (health > 0)
         {
             if (Vector3.Distance(transform.position, player.position) < 10)
