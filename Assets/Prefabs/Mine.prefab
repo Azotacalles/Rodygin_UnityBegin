@@ -127,6 +127,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   force: 5
   radiusDamage: 25
-  enemyLayer:
-    serializedVersion: 2
-    m_Bits: 256
+  forceExplosion: 300
