@@ -42,7 +42,7 @@ public class MyGameEnding : MonoBehaviour
                 //print(playerHealth);
             }
         }
-        else print("GAME OVER!");
+        //else print("GAME OVER!");
 
         if (enemies == 0)
             print("WIN!");
