@@ -39,10 +39,10 @@ public class MyGameEnding : MonoBehaviour
             {
                 timer = 1;
                 playerHealth--;
-                print(playerHealth);
+                //print(playerHealth);
             }
         }
-        else print("GAME OVER!");
+        //else print("GAME OVER!");
 
         if (enemies == 0)
             print("WIN!");
