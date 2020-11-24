@@ -12,6 +12,13 @@ public class HuntScript : MonoBehaviour
     public Vector3 offset;
     private Transform target;
     public NavMeshAgent navMeshAgent;
+    private bool hunt = false;
+
+    public bool Hunt
+    {
+        get { return hunt; }
+        set { hunt = value; }
+    }
 
     void Start()
     {
@@ -25,6 +32,7 @@ public class HuntScript : MonoBehaviour
             if (RayToScan())
             {
                 print("Hunt");
+                hunt = true;
                 navMeshAgent.SetDestination(target.transform.position);
             }
             else

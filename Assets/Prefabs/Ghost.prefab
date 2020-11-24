@@ -567,6 +567,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   navMeshAgent: {fileID: 3540391287371809819}
   waypoints: []
+  huntScript: {fileID: 3506260537953034802}
 --- !u!82 &6986812540457888193
 AudioSource:
   m_ObjectHideFlags: 0
