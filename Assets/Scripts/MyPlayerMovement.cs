@@ -7,6 +7,7 @@ public class MyPlayerMovement : MonoBehaviour
     [SerializeField] private float speed;
     [SerializeField] private float jumpSpeed;
     [SerializeField] private float turnSpeed;
+    [SerializeField] private GameObject cameraPoint;
 
     private bool isGrounded;
     private Rigidbody rb;
@@ -23,21 +24,27 @@ public class MyPlayerMovement : MonoBehaviour
 
         MovementLogic();
 
-        RotateLogic();
+        //RotateLogic();
     }
 
     private void RotateLogic()
     {
         Vector3 rotation = Vector3.zero;
         rotation.y = Input.GetAxis("Horizontal");
-        transform.Rotate(rotation * turnSpeed * Time.fixedDeltaTime);
+        transform.Rotate(rotation * turnSpeed * Time.deltaTime);
     }
 
     private void MovementLogic()
     {
         float moveVertical = Input.GetAxis("Vertical");
+        if (moveVertical > 0) transform.rotation = cameraPoint.transform.rotation;
+        if (moveVertical < 0)
+        {
+            transform.rotation = Quaternion.Euler(0f, 180 + cameraPoint.transform.rotation.eulerAngles.y, 0f);
+            moveVertical = -moveVertical;
+        }
         Vector3 movement = new Vector3(0.0f, 0.0f, moveVertical);
-        transform.Translate(movement * speed * Time.fixedDeltaTime);
+        transform.Translate(movement * speed * Time.deltaTime);
     }
 
     private void JumpLogic()
