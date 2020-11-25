@@ -457,6 +457,7 @@ GameObject:
   - component: {fileID: 6986812540457888193}
   - component: {fileID: -3407911155791221714}
   - component: {fileID: 3506260537953034802}
+  - component: {fileID: 778156312987587459}
   m_Layer: 0
   m_Name: Ghost
   m_TagString: Enemy
@@ -694,6 +695,20 @@ MonoBehaviour:
   angle: 5
   offset: {x: 0, y: 0.5, z: 0}
   navMeshAgent: {fileID: 3540391287371809819}
+--- !u!136 &778156312987587459
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5075534488604402034}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  m_Radius: 0.3
+  m_Height: 1.5
+  m_Direction: 2
+  m_Center: {x: 0, y: 0.2, z: 1}
 --- !u!1 &5863192054190611860
 GameObject:
   m_ObjectHideFlags: 0

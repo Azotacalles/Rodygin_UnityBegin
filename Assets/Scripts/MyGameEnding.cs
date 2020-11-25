@@ -18,8 +18,7 @@ public class MyGameEnding : MonoBehaviour
     {
         set 
         {
-            playerHealth = value;
-            if (playerHealth > 100) playerHealth = 100;
+            playerHealth = Mathf.Clamp(value, 0 , 100);
         }
         get { return playerHealth; }
     }
@@ -39,10 +38,15 @@ public class MyGameEnding : MonoBehaviour
             {
                 timer = 1;
                 playerHealth--;
-                //print(playerHealth);
+               // print(playerHealth);
             }
         }
-        //else print("GAME OVER!");
+        else
+        {
+            print("GAME OVER!");
+            transform.position = new Vector3(-28, 0, 41);
+            playerHealth = 100;
+        }
 
         if (enemies == 0)
             print("WIN!");

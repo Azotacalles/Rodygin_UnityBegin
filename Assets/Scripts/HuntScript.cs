@@ -31,13 +31,13 @@ public class HuntScript : MonoBehaviour
         {
             if (RayToScan())
             {
-                print("Hunt");
+                //print("Hunt");
                 hunt = true;
                 navMeshAgent.SetDestination(target.transform.position);
             }
             else
             {
-                print("Find");
+                //print("Find");
             }
         }
     }

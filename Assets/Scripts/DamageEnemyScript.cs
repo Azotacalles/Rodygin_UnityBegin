@@ -26,4 +26,9 @@ public class DamageEnemyScript : MonoBehaviour
             Destroy(gameObject);
         }
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.CompareTag("Player")) gameEnding.PlayerHealth = 0;
+    }
 }

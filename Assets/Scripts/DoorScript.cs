@@ -5,27 +5,30 @@ using UnityEngine;
 public class DoorScript : MonoBehaviour
 {
     [SerializeField] private int numberKey;
-    private bool open;
+    private bool open = false;
     private AudioSource audioSource;
-    private Vector3 beginPosition;
-    private Vector3 currentPosition;
-    private float angle; 
+    //private Vector3 beginPosition;
+    //private Vector3 currentPosition;
+    //private float angle;
+    private Animation animationDoor;
 
     private void Start()
     {
         audioSource = GetComponent<AudioSource>();
-        audioSource.Stop();
-        beginPosition = transform.position;
-        currentPosition = transform.position;
-        angle = Mathf.Round(transform.rotation.eulerAngles.y);
+        animationDoor = GetComponent<Animation>();
+        //beginPosition = transform.position;
+        //currentPosition = transform.position;
+        //angle = Mathf.Round(transform.rotation.eulerAngles.y);
     }
 
     private void OnCollisionEnter(Collision collision)
     {
+
         if (collision.gameObject.CompareTag("Player"))
         {
-            if (collision.gameObject.GetComponent<PlayerInventory>().Keys[numberKey])
+            if (collision.gameObject.GetComponent<PlayerInventory>().Keys[numberKey] && !open)
             {
+                animationDoor.Play();
                 print($"Open {numberKey} Door");
                 open = true;
                 audioSource.Play();
@@ -33,18 +36,18 @@ public class DoorScript : MonoBehaviour
         }
     }
 
-    private void Update()
-    {      
-        if (open)
-        {
-            float dis = Vector3.Distance(beginPosition, currentPosition);
-            if (dis < 2)
-            {
-                if (angle == 90 || angle == 270) transform.position += Vector3.forward * Time.deltaTime;
-                else transform.position += Vector3.right * Time.deltaTime;
-                currentPosition = transform.position;
-            }
-            else enabled = false;
-        }
-    }
+    //private void Update()
+    //{      
+    //    //if (open)
+    //    //{
+    //    //    float dis = Vector3.Distance(beginPosition, currentPosition);
+    //    //    if (dis < 2)
+    //    //    {
+    //    //        if (angle == 90 || angle == 270) transform.position += Vector3.forward * Time.deltaTime;
+    //    //        else transform.position += Vector3.right * Time.deltaTime;
+    //    //        currentPosition = transform.position;
+    //    //    }
+    //    //    else enabled = false;
+    //    //}
+    //}
 }
