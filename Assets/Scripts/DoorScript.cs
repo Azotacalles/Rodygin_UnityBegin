@@ -4,45 +4,50 @@ using UnityEngine;
 
 public class DoorScript : MonoBehaviour
 {
-    private bool open;
+    [SerializeField] private int numberKey;
+    private bool open = false;
     private AudioSource audioSource;
-    private int interpolationFramesCount = 45; // Number of frames to completely interpolate between the 2 positions
-    private int elapsedFrames = 0;
+    //private Vector3 beginPosition;
+    //private Vector3 currentPosition;
+    //private float angle;
+    private Animation animationDoor;
 
     private void Start()
     {
         audioSource = GetComponent<AudioSource>();
-        audioSource.Stop();
+        animationDoor = GetComponent<Animation>();
+        //beginPosition = transform.position;
+        //currentPosition = transform.position;
+        //angle = Mathf.Round(transform.rotation.eulerAngles.y);
     }
 
     private void OnCollisionEnter(Collision collision)
     {
+
         if (collision.gameObject.CompareTag("Player"))
         {
-            if (collision.gameObject.GetComponent<PlayerInventory>().Keys[0])
+            if (collision.gameObject.GetComponent<PlayerInventory>().Keys[numberKey] && !open)
             {
-                print("Open");
+                animationDoor.Play();
+                print($"Open {numberKey} Door");
                 open = true;
                 audioSource.Play();
             }
         }
     }
 
-    private void Update()
-    {
-        if(open)
-        {
-            if (transform.position.z > 49)
-            {
-                float interpolationRatio = (float)elapsedFrames / interpolationFramesCount;
-
-                transform.position = Vector3.Lerp(transform.position,
-                    new Vector3(transform.position.x, 0, transform.position.z - 0.25f),
-                    interpolationRatio);
-
-                elapsedFrames++;
-            }
-            else { open = false; audioSource.Stop(); }
-        }
-    }
+    //private void Update()
+    //{      
+    //    //if (open)
+    //    //{
+    //    //    float dis = Vector3.Distance(beginPosition, currentPosition);
+    //    //    if (dis < 2)
+    //    //    {
+    //    //        if (angle == 90 || angle == 270) transform.position += Vector3.forward * Time.deltaTime;
+    //    //        else transform.position += Vector3.right * Time.deltaTime;
+    //    //        currentPosition = transform.position;
+    //    //    }
+    //    //    else enabled = false;
+    //    //}
+    //}
 }

@@ -4,17 +4,15 @@ using UnityEngine;
 
 public class CameraScript : MonoBehaviour
 {
-    [SerializeField] private Transform Hero = null;
-    private Vector3 startPosition = Vector3.zero;
+    [SerializeField] private Transform hero;
+    [SerializeField] private float turnSpeed;
+    private Vector3 rotate;
+   
 
-    void Start()
-    {
-        startPosition = transform.position - Hero.position;
-    }
-
-    // Update is called once per frame
     void Update()
     {
-        transform.position = Hero.position + startPosition;
+        transform.position = new Vector3(hero.position.x, 0f, hero.transform.position.z);
+        rotate.y = Input.GetAxis("Horizontal");
+        transform.Rotate(rotate * turnSpeed * Time.deltaTime);
     }
 }
