@@ -11,10 +11,12 @@ public class MyPlayerMovement : MonoBehaviour
 
     private bool isGrounded;
     private Rigidbody rb;
+    private Animator playerAnimator;
 
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+        playerAnimator = GetComponent<Animator>();
     }
 
 
@@ -43,6 +45,8 @@ public class MyPlayerMovement : MonoBehaviour
             transform.rotation = Quaternion.Euler(0f, 180 + cameraPoint.transform.rotation.eulerAngles.y, 0f);
             moveVertical = -moveVertical;
         }
+        bool isWalking = !Mathf.Approximately(moveVertical, 0f);
+        playerAnimator.SetBool("IsWalking", isWalking);
         Vector3 movement = new Vector3(0.0f, 0.0f, moveVertical);
         transform.Translate(movement * speed * Time.deltaTime);
     }
