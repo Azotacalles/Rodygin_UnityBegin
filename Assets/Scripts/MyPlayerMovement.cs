@@ -15,6 +15,7 @@ public class MyPlayerMovement : MonoBehaviour
 
     void Start()
     {
+        Cursor.visible = false;
         rb = GetComponent<Rigidbody>();
         playerAnimator = GetComponent<Animator>();
     }
